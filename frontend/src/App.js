@@ -5,6 +5,7 @@ import Navbar from './components/Navbar.component';
 import Home from './components/Home.component';
 import Login from './components/Login.component';
 import Signup from './components/Signup.component';
+import CreateBubble from './components/CreateBubble.component';
 
 import BubbleState from './context/bubble/BubbleState';
 
@@ -17,6 +18,7 @@ const App = () => {
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
+          <Route exact path="/create" component={CreateBubble} />
         </Switch>
       </Router>
     </BubbleState>
