@@ -7,7 +7,7 @@ const BubbleList = () => {
 
   return (
     <div>
-      {bubbleContext.bubbles.map(bubble => <BubbleItem bubble={bubble} />)}
+      {bubbleContext.bubbles.map(bubble => <BubbleItem key={bubble.id} bubble={bubble} />)}
     </div>
   )
 }

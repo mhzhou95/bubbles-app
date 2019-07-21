@@ -7,8 +7,6 @@ import {
   ADD_BUBBLE,
   DELETE_BUBBLE,
   UPDATE_BUBBLE,
-  SET_CURRENT,
-  CLEAR_CURRENT,
   FILTER_BUBBLES,
   CLEAR_FILTER
 } from '../types';
@@ -36,13 +34,15 @@ const BubbleState = props => {
     dispatch({ type: ADD_BUBBLE, payload: bubble })
   }
   // Update bubble
-
+  const updateBubble = bubble => {
+    dispatch({ type: UPDATE_BUBBLE, payload: bubble })
+  }
   // Delete bubble
   const deleteBubble = id => {
     dispatch({ type: DELETE_BUBBLE, payload: id })
   }
   return (
-    <BubbleContext.Provider value={{ bubbles: state.bubbles, addBubble, deleteBubble }}>
+    <BubbleContext.Provider value={{ bubbles: state.bubbles, addBubble, deleteBubble, updateBubble }}>
       {props.children}
     </BubbleContext.Provider>
   );

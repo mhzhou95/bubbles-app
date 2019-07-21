@@ -2,7 +2,5 @@ export const ADD_BUBBLE = 'ADD_BUBBLE';
 export const DELETE_BUBBLE = 'DELETE_BUBBLE';
 export const UPDATE_BUBBLE = 'UPDATE_BUBBLE';
 
-export const SET_CURRENT = 'SET_CURRENT';
-export const CLEAR_CURRENT = 'CLEAR_CURRENT';
 export const FILTER_BUBBLES = 'FILTER_BUBBLES';
 export const CLEAR_FILTER = 'CLEAR_FILTER';

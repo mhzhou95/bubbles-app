@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { Link } from 'react-router-dom';
 import BubbleContext from '../../context/bubble/bubbleContext';
 
 const BubbleItem = (prop) => {
@@ -7,9 +8,10 @@ const BubbleItem = (prop) => {
   const onDelete = () => {
     bubbleContext.deleteBubble(prop.bubble.id);
   }
+  const editLink = `/bubble/${prop.bubble.id}`
   return (
     <div>
-      <h4>{prop.bubble.id}</h4>
+      <h4><Link to={editLink}>{prop.bubble.id}</Link></h4>
       <p>{prop.bubble.message}</p>
       <button onClick={onDelete}>Delete</button>
     </div>

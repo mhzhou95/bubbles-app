@@ -20,6 +20,12 @@ export default (state, action) => {
         ...state,
         bubbles: state.bubbles.filter(bubble => bubble.id !== action.payload)
       }
+    case UPDATE_BUBBLE:
+      return {
+        ...state,
+        bubbles: state.bubbles.map(bubble => bubble.id === action.payload.id ? action.payload : bubble)
+      }
+
     default:
       return state;
   }
