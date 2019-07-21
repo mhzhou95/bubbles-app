@@ -31,13 +31,16 @@ const BubbleState = props => {
   const [state, dispatch] = useReducer(bubbleReducer, initialState);
 
   // Add bubble
-
+  const addBubble = bubble => {
+    bubble.id = uuid.v4();
+    dispatch({ type: ADD_BUBBLE, payload: bubble })
+  }
   // Update bubble
 
   // Delete bubble
 
   return (
-    <BubbleContext.Provider value={{ bubbles: state.bubbles }}>
+    <BubbleContext.Provider value={{ bubbles: state.bubbles, addBubble }}>
       {props.children}
     </BubbleContext.Provider>
   );
