@@ -15,6 +15,11 @@ export default (state, action) => {
         ...state,
         bubbles: [...state.bubbles, action.payload]
       }
+    case DELETE_BUBBLE:
+      return {
+        ...state,
+        bubbles: state.bubbles.filter(bubble => bubble.id !== action.payload)
+      }
     default:
       return state;
   }

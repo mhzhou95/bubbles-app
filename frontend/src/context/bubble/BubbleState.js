@@ -38,9 +38,11 @@ const BubbleState = props => {
   // Update bubble
 
   // Delete bubble
-
+  const deleteBubble = id => {
+    dispatch({ type: DELETE_BUBBLE, payload: id })
+  }
   return (
-    <BubbleContext.Provider value={{ bubbles: state.bubbles, addBubble }}>
+    <BubbleContext.Provider value={{ bubbles: state.bubbles, addBubble, deleteBubble }}>
       {props.children}
     </BubbleContext.Provider>
   );
