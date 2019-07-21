@@ -1,9 +1,10 @@
 import React from 'react'
+import Bubbles from './bubbles/BubbleList.component';
 
 const Home = () => {
   return (
     <div>
-      This is the home page
+      <Bubbles />
     </div>
   )
 }
