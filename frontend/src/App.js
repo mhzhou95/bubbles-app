@@ -8,6 +8,8 @@ import Register from './components/auth/Register.component';
 import CreateBubble from './components/CreateBubble.component';
 import BubbleEdit from './components/bubbles/BubbleEdit.component';
 import Alerts from './components/Alerts.component';
+import PrivateRoute from './components/routing/PrivateRoute.component';
+
 import AuthState from './context/auth/AuthState';
 import BubbleState from './context/bubble/BubbleState';
 import AlertState from './context/alert/AlertState';
@@ -29,8 +31,8 @@ const App = () => {
               <Route exact path="/" component={Home} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
-              <Route exact path="/create" component={CreateBubble} />
-              <Route exact path="/bubble/:id" component={BubbleEdit} />
+              <PrivateRoute exact path="/create" component={CreateBubble} />
+              <PrivateRoute exact path="/bubble/:id" component={BubbleEdit} />
             </Switch>
           </Router>
         </AlertState>
