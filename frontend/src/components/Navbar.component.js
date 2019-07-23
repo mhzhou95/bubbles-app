@@ -1,13 +1,16 @@
 import React, { Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../context/auth/authContext';
+import BubbleContext from '../context/bubble/bubbleContext';
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
+  const bubbleContext = useContext(BubbleContext)
   const { isAuthenticated, logout, user } = authContext;
 
   const onLogout = () => {
     logout();
+
   }
   const authLinks = (
     <Fragment>

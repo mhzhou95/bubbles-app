@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import uuid from 'uuid';
+import axios from 'axios';
 import BubbleContext from './bubbleContext';
 import bubbleReducer from './bubbleReducer';
 
@@ -8,39 +8,59 @@ import {
   DELETE_BUBBLE,
   UPDATE_BUBBLE,
   FILTER_BUBBLES,
-  CLEAR_FILTER
+  CLEAR_FILTER,
+  BUBBLE_ERROR,
+  FETCH_BUBBLES,
+  FETCH_ERROR
 } from '../types';
 
 const BubbleState = props => {
   // set initial State grab from backend
   const initialState = {
-    bubbles: [{
-      id: 1,
-      message: 'first bubble'
-    },
-    {
-      id: 2,
-      message: 'second bubble'
-    }
-    ],
-    filtered: null
+    bubbles: null,
+    filtered: null,
+    error: null,
+    loading: true
   }
 
   // connect reducer with state
   const [state, dispatch] = useReducer(bubbleReducer, initialState);
+  // fetch bubbles
+  const fetchBubbles = async () => {
+    try {
+      const res = await axios.get('/api/bubbles');
+      dispatch({ type: FETCH_BUBBLES, payload: res.data })
+    } catch (error) {
+      dispatch({ type: FETCH_ERROR, payload: error.response.msg })
+    }
+  }
 
   // Add bubble
-  const addBubble = bubble => {
-    bubble.id = uuid.v4();
-    dispatch({ type: ADD_BUBBLE, payload: bubble })
+  const addBubble = async bubble => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    try {
+      const res = await axios.post('/api/bubbles', bubble, config);
+      dispatch({ type: ADD_BUBBLE, payload: res.data })
+    } catch (error) {
+      dispatch({ type: BUBBLE_ERROR, payload: error.response.msg })
+    }
   }
   // Update bubble
   const updateBubble = bubble => {
     dispatch({ type: UPDATE_BUBBLE, payload: bubble })
   }
   // Delete bubble
-  const deleteBubble = id => {
-    dispatch({ type: DELETE_BUBBLE, payload: id })
+  const deleteBubble = async id => {
+    try {
+      await axios.delete(`/api/bubbles/${id}`)
+      dispatch({ type: DELETE_BUBBLE, payload: id })
+    } catch (error) {
+      dispatch({ type: BUBBLE_ERROR, payload: error.response.msg })
+    }
   }
   // Search Filter
   const filterBubbles = (text) => {
@@ -55,11 +75,14 @@ const BubbleState = props => {
       value={{
         bubbles: state.bubbles,
         filtered: state.filtered,
+        error: state.error,
+        loading: state.loading,
         addBubble,
         deleteBubble,
         updateBubble,
         filterBubbles,
-        clearFilter
+        clearFilter,
+        fetchBubbles
       }}
     >
       {props.children}

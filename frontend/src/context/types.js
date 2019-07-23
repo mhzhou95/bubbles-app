@@ -4,6 +4,10 @@ export const UPDATE_BUBBLE = 'UPDATE_BUBBLE';
 
 export const FILTER_BUBBLES = 'FILTER_BUBBLES';
 export const CLEAR_FILTER = 'CLEAR_FILTER';
+export const BUBBLE_ERROR = 'BUBBLE_ERROR';
+export const FETCH_BUBBLES = 'FETCH_BUBBLES';
+export const FETCH_ERROR = 'FETCH_ERROR';
+
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const REGISTER_SUCCES = 'REGISTER_SUCCESS';

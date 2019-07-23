@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef } from 'react'
+import React, { useContext, useRef } from 'react'
 import BubbleContext from '../../context/bubble/bubbleContext';
 
 const BubbleSearch = () => {

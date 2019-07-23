@@ -1,9 +1,12 @@
 import React from 'react'
 import BubbleForm from './bubbles/BubbleForm.component';
 
-const CreateBubble = () => {
+const CreateBubble = (props) => {
+  const onSubmit = () => {
+    props.history.push('/')
+  }
   return (
-    <BubbleForm />
+    <BubbleForm onSubmit={onSubmit} />
   )
 }
 

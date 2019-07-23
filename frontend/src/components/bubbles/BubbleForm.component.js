@@ -1,7 +1,8 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext } from 'react';
 import BubbleContext from '../../context/bubble/bubbleContext';
 
-const BubbleForm = () => {
+
+const BubbleForm = (props) => {
   const bubbleContext = useContext(BubbleContext);
 
   const [bubble, setBubble] = useState({
@@ -18,6 +19,7 @@ const BubbleForm = () => {
     setBubble({
       message: ''
     })
+    props.onSubmit()
   }
   return (
     <form onSubmit={onSubmit}>
@@ -28,4 +30,4 @@ const BubbleForm = () => {
   )
 }
 
-export default BubbleForm
+export default BubbleForm;

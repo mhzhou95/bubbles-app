@@ -1,21 +1,27 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import BubbleContext from '../../context/bubble/bubbleContext';
+import AuthContext from '../../context/auth/authContext';
 
-const BubbleItem = (prop) => {
-  const bubbleContext = useContext(BubbleContext)
+const BubbleItem = (props) => {
+  const bubbleContext = useContext(BubbleContext);
+  const authContext = useContext(AuthContext);
+  const { bubble } = props;
+  const { user, isAuthenticated } = authContext;
 
   const onDelete = () => {
-    bubbleContext.deleteBubble(prop.bubble.id);
+    bubbleContext.deleteBubble(bubble._id);
   }
-  const editLink = `/bubble/${prop.bubble.id}`
+  const editLink = `/bubble/${bubble._id}`;
+
   return (
     <div>
-      <h4><Link to={editLink}>{prop.bubble.id}</Link></h4>
-      <p>{prop.bubble.message}</p>
-      <button onClick={onDelete}>Delete</button>
+      <h4><Link to={editLink}>{bubble._id}</Link></h4>
+      <p>{bubble.message}</p>
+      {isAuthenticated && user._id === bubble.user && <button onClick={onDelete}>Delete</button>}
     </div>
   )
 }
 
 export default BubbleItem
+

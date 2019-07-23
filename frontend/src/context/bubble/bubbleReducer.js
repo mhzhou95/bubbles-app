@@ -3,25 +3,38 @@ import {
   DELETE_BUBBLE,
   UPDATE_BUBBLE,
   FILTER_BUBBLES,
-  CLEAR_FILTER
+  CLEAR_FILTER,
+  BUBBLE_ERROR,
+  FETCH_BUBBLES,
+  FETCH_ERROR
 } from '../types';
 
 export default (state, action) => {
   switch (action.type) {
+    case FETCH_BUBBLES:
+      return {
+        ...state,
+        bubbles: action.payload,
+        loading: false
+      }
     case ADD_BUBBLE:
       return {
         ...state,
-        bubbles: [...state.bubbles, action.payload]
+        bubbles: [action.payload, ...state.bubbles],
+        loading: false
       }
     case DELETE_BUBBLE:
       return {
         ...state,
-        bubbles: state.bubbles.filter(bubble => bubble.id !== action.payload)
+        bubbles: state.bubbles.filter(bubble => bubble._id !== action.payload),
+        loading: false
       }
     case UPDATE_BUBBLE:
       return {
         ...state,
-        bubbles: state.bubbles.map(bubble => bubble.id === action.payload.id ? action.payload : bubble)
+        bubbles: state.bubbles.map(bubble => bubble.id === action.payload.id ?
+          action.payload : bubble),
+        loading: false
       }
     case FILTER_BUBBLES:
       return {
@@ -35,6 +48,12 @@ export default (state, action) => {
       return {
         ...state,
         filtered: null
+      }
+    case BUBBLE_ERROR:
+    case FETCH_ERROR:
+      return {
+        ...state,
+        error: action.payload
       }
     default:
       return state;
