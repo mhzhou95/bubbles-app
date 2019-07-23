@@ -1,13 +1,12 @@
 import React, { useContext, useState } from 'react'
 import BubbleContext from '../../context/bubble/bubbleContext';
 
-const BubbleEdit = () => {
+const BubbleEdit = (props) => {
   const bubbleContext = useContext(BubbleContext);
   const param = window.location.pathname.substring(8);
-  const getBubble = bubbleContext.bubbles.filter(bubble => bubble.id.toString() === param);
-
+  const getBubble = bubbleContext.bubbles.filter(bubble => bubble._id.toString() === param);
   const [bubble, setBubble] = useState({
-    id: getBubble[0].id,
+    _id: getBubble[0]._id,
     message: getBubble[0].message
   });
   const { message } = bubble;
@@ -15,9 +14,10 @@ const BubbleEdit = () => {
   const onChange = e => {
     setBubble({ ...bubble, [e.target.name]: e.target.value })
   }
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault();
-    bubbleContext.updateBubble(bubble);
+    await bubbleContext.updateBubble(bubble);
+    props.history.push('/')
   }
   return (
     <div>

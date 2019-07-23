@@ -18,15 +18,14 @@ const BubbleList = () => {
   }
   return (
     <div>
-      {loading}
-      <Fragment>
+      {loading ? <p>Loading...</p> : (<Fragment>
         <BubbleSearch />
         {filtered !== null ? filtered.map(
           bubble => <BubbleItem key={bubble._id} bubble={bubble} />)
           :
           bubbles.map(bubble => <BubbleItem key={bubble._id} bubble={bubble} />)
         }
-      </Fragment>
+      </Fragment>)}
     </div>
   )
 }

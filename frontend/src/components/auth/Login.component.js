@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import AuthContext from '../../context/auth/authContext';
 import AlertContext from '../../context/alert/alertContext';
+import BubbleContext from '../../context/bubble/bubbleContext';
 
 const Login = (props) => {
   const alertContext = useContext(AlertContext);
@@ -11,11 +12,13 @@ const Login = (props) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      props.history.push('/');
+      console.log('authen')
     }
-    if (error === 'Invalid Credentials ') {
+
+    if (error !== null) {
       if (alertContext.alerts.length < 2) {
         setAlert(error);
+        console.log(error)
       }
     }
     // eslint-disable-next-line
@@ -37,7 +40,6 @@ const Login = (props) => {
       email,
       password
     });
-    clearErrors();
   }
   return (
     <div>

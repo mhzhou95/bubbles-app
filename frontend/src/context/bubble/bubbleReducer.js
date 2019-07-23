@@ -32,7 +32,7 @@ export default (state, action) => {
     case UPDATE_BUBBLE:
       return {
         ...state,
-        bubbles: state.bubbles.map(bubble => bubble.id === action.payload.id ?
+        bubbles: state.bubbles.map(bubble => bubble._id === action.payload._id ?
           action.payload : bubble),
         loading: false
       }

@@ -50,8 +50,18 @@ const BubbleState = props => {
     }
   }
   // Update bubble
-  const updateBubble = bubble => {
-    dispatch({ type: UPDATE_BUBBLE, payload: bubble })
+  const updateBubble = async bubble => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    try {
+      const res = await axios.put(`/api/bubbles/${bubble._id}`, bubble, config)
+      dispatch({ type: UPDATE_BUBBLE, payload: res.data })
+    } catch (error) {
+      dispatch({ type: BUBBLE_ERROR, payload: error.response.msg })
+    }
   }
   // Delete bubble
   const deleteBubble = async id => {
