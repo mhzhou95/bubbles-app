@@ -22,7 +22,8 @@ const BubbleState = props => {
       id: 2,
       message: 'second bubble'
     }
-    ]
+    ],
+    filtered: null
   }
 
   // connect reducer with state
@@ -41,8 +42,26 @@ const BubbleState = props => {
   const deleteBubble = id => {
     dispatch({ type: DELETE_BUBBLE, payload: id })
   }
+  // Search Filter
+  const filterBubbles = (text) => {
+    dispatch({ type: FILTER_BUBBLES, payload: text })
+  }
+  // Clear Search Filter
+  const clearFilter = () => {
+    dispatch({ type: CLEAR_FILTER });
+  }
   return (
-    <BubbleContext.Provider value={{ bubbles: state.bubbles, addBubble, deleteBubble, updateBubble }}>
+    <BubbleContext.Provider
+      value={{
+        bubbles: state.bubbles,
+        filtered: state.filtered,
+        addBubble,
+        deleteBubble,
+        updateBubble,
+        filterBubbles,
+        clearFilter
+      }}
+    >
       {props.children}
     </BubbleContext.Provider>
   );

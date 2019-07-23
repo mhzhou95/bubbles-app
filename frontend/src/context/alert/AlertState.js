@@ -5,7 +5,8 @@ import alertReducer from './alertReducer';
 
 import {
   SET_ALERT,
-  REMOVE_ALERT
+  REMOVE_ALERT,
+  CLEAR_ALERTS
 } from '../types';
 
 const AlertState = props => {
@@ -16,7 +17,7 @@ const AlertState = props => {
   const [state, dispatch] = useReducer(alertReducer, initialState);
 
   // Set alert
-  const setAlert = (msg, timeout = 10000) => {
+  const setAlert = (msg, timeout = 5000) => {
     const id = uuid.v4();
     dispatch({
       type: SET_ALERT,
@@ -24,12 +25,16 @@ const AlertState = props => {
     })
     setTimeout(() => dispatch({ type: REMOVE_ALERT, payload: id }), timeout)
   }
-
+  // clear Alerts
+  const clearAlerts = () => {
+    dispatch({ type: CLEAR_ALERTS })
+  }
   return (
     <AlertContext.Provider
       value={{
         alerts: state,
-        setAlert
+        setAlert,
+        clearAlerts
       }}
     >
       {props.children}

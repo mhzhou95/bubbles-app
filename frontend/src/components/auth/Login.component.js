@@ -1,27 +1,55 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
+import AuthContext from '../../context/auth/authContext';
+import AlertContext from '../../context/alert/alertContext';
 
-const Login = () => {
+const Login = (props) => {
+  const alertContext = useContext(AlertContext);
+  const authContext = useContext(AuthContext);
+
+  const { setAlert } = alertContext;
+  const { login, error, clearErrors, isAuthenticated } = authContext;
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      props.history.push('/');
+    }
+    if (error === 'Invalid Credentials ') {
+      if (alertContext.alerts.length < 2) {
+        setAlert(error);
+      }
+    }
+    // eslint-disable-next-line
+  }, [error, isAuthenticated, props.history]);
+
   const [user, setUser] = useState({
     email: '',
     password: ''
   })
+
+  const { email, password } = user;
 
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   }
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log('login form submited')
+    login({
+      email,
+      password
+    });
+    clearErrors();
   }
   return (
     <div>
       <h1>Login to Your Account</h1>
       <form onSubmit={onSubmit}>
         <label htmlFor="email">Email: </label>
-        <input type="text" placeholder="used to sign in" name="email" value={user.email} onChange={onChange} />
+        <input type="text" placeholder="used to sign in" name="email" value={email}
+          required onChange={onChange} />
 
         <label htmlFor="password">Password: </label>
-        <input type="text" placeholder="password" name="password" value={user.password} onChange={onChange} />
+        <input type="text" placeholder="password" name="password" value={password}
+          required onChange={onChange} />
 
         <input type="submit" value="Login" />
       </form>

@@ -2,8 +2,6 @@ import {
   ADD_BUBBLE,
   DELETE_BUBBLE,
   UPDATE_BUBBLE,
-  SET_CURRENT,
-  CLEAR_CURRENT,
   FILTER_BUBBLES,
   CLEAR_FILTER
 } from '../types';
@@ -25,7 +23,19 @@ export default (state, action) => {
         ...state,
         bubbles: state.bubbles.map(bubble => bubble.id === action.payload.id ? action.payload : bubble)
       }
-
+    case FILTER_BUBBLES:
+      return {
+        ...state,
+        filtered: state.bubbles.filter(bubble => {
+          const regex = new RegExp(`${action.payload}`, 'gi');
+          return bubble.message.match(regex)
+        })
+      }
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        filtered: null
+      }
     default:
       return state;
   }

@@ -13,6 +13,10 @@ router.post('/', async (req, res) => {
   let newUser = new User({ email, username, password });
 
   try {
+    let user = await User.findOne({ email });
+    if (user) {
+      return res.status(400).json({ msg: 'User already exists' });
+    }
     const salt = await bcrypt.genSalt(10);
     newUser.password = await bcrypt.hash(password, salt);
     await newUser.save();
