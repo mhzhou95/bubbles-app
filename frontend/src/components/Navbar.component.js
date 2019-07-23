@@ -1,11 +1,9 @@
 import React, { Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../context/auth/authContext';
-import BubbleContext from '../context/bubble/bubbleContext';
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
-  const bubbleContext = useContext(BubbleContext)
   const { isAuthenticated, logout, user } = authContext;
 
   const onLogout = () => {
@@ -28,9 +26,11 @@ const Navbar = () => {
   const guestLinks = (
     <Fragment >
       <nav className="nav-bar">
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/register">Register</Link></li>
-        <li><Link to="/login">Login</Link></li>
+        <ul>
+          <li><Link className="link" to="/">Home</Link></li>
+          <li><Link className="link" to="/register">Register</Link></li>
+          <li><Link className="link" to="/login">Login</Link></li>
+        </ul>
       </nav>
     </Fragment>);
   return (

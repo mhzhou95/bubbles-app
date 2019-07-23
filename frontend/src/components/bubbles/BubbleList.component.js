@@ -17,14 +17,16 @@ const BubbleList = () => {
     return <h4>No Bubbles Were Ever made </h4>
   }
   return (
-    <div>
+    <div className="whole-container">
       {loading ? <p>Loading...</p> : (<Fragment>
         <BubbleSearch />
-        {filtered !== null ? filtered.map(
-          bubble => <BubbleItem key={bubble._id} bubble={bubble} />)
-          :
-          bubbles.map(bubble => <BubbleItem key={bubble._id} bubble={bubble} />)
-        }
+        <div className="bubble-list-container">
+          {filtered !== null ? filtered.map(
+            bubble => <BubbleItem key={bubble._id} bubble={bubble} />)
+            :
+            bubbles.map(bubble => <BubbleItem key={bubble._id} bubble={bubble} />)
+          }
+        </div>
       </Fragment>)}
     </div>
   )

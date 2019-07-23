@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext, useEffect } from 'react'
+import React, { Fragment, useState, useContext } from 'react'
 import { Link } from 'react-router-dom';
 import BubbleContext from '../../context/bubble/bubbleContext';
 import AuthContext from '../../context/auth/authContext';
@@ -32,14 +32,13 @@ const BubbleItem = (props) => {
     bubbleContext.deleteBubble(bubble._id);
   }
   return (
-    <div>
-      <h4>{bubble.username}</h4>
-      <p>{bubble.message}</p>
-      <p>{bubble.upvotes}</p>
-      <button onClick={handleUpVote}>UpVote</button>
+    <div className="bubble-item-container">
+      <h2>{bubble.username}</h2>
+      <p className="bubble-item-message">{bubble.message}</p>
+      <p className="bubble-item-upvotes">upvotes: {bubble.upvotes} <button onClick={handleUpVote}><i className="fas fa-arrow-alt-circle-up"></i></button></p>
       {isAuthenticated && user._id === bubble.user &&
         <Fragment>
-          <button onClick={onDelete}>Delete</button>  <Link to={editLink}>Edit</Link>
+          <button onClick={onDelete}>Delete</button>  <button><Link className="bubble-item-link" to={editLink}>Edit</Link></button>
         </Fragment>}
     </div>
   )
