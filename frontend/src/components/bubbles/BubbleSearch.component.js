@@ -16,9 +16,9 @@ const BubbleSearch = () => {
   }
 
   return (
-    <div>
+    <div className="search-bar">
       <form>
-        <input ref={text} type="text" placeholder="search bubbles" onChange={onChange} />
+        <input className="search-bar-input" ref={text} type="text" placeholder="search bubbles" onChange={onChange} />
       </form>
     </div>
   )
