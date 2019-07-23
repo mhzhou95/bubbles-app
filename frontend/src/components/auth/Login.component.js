@@ -8,10 +8,8 @@ const Login = (props) => {
 
   const { setAlert } = alertContext;
   const { login, error, clearErrors, isAuthenticated } = authContext;
-
   useEffect(() => {
     if (isAuthenticated) {
-
       window.location.href = ('/')
     }
     if (error !== null) {
@@ -41,18 +39,21 @@ const Login = (props) => {
     });
   }
   return (
-    <div>
+    <div className="login-form">
       <h1>Login to Your Account</h1>
       <form onSubmit={onSubmit}>
-        <label htmlFor="email">Email: </label>
-        <input type="text" placeholder="used to sign in" name="email" value={email}
-          required onChange={onChange} />
+        <div className="form-items">
+          <label htmlFor="email">Email: </label>
+          <input type="text" placeholder="used to sign in" name="email" value={email}
+            required onChange={onChange} />
+        </div>
 
-        <label htmlFor="password">Password: </label>
-        <input type="text" placeholder="password" name="password" value={password}
-          required onChange={onChange} />
-
-        <input type="submit" value="Login" />
+        <div className="form-items">
+          <label htmlFor="password">Password: </label>
+          <input type="text" placeholder="password" name="password" value={password}
+            required onChange={onChange} />
+        </div>
+        <input className="form-submit-button" type="submit" value="Login" />
       </form>
     </div>
   )

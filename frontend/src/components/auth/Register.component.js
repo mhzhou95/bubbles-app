@@ -51,26 +51,36 @@ const Register = (props) => {
     }
   }
   return (
-    <div>
+    <div className="register-form">
       <h1>Make a Account</h1>
       <form onSubmit={onSubmit}>
-        <label htmlFor="email">Email: </label>
-        <input
-          type="email" placeholder="used to sign in" name="email" value={user.email}
-          required onChange={onChange} />
 
-        <label htmlFor="username">Username: </label>
-        <input type="text" placeholder="display name" name="username" value={user.username}
-          required minLength={3} maxLength={12} onChange={onChange} />
+        <div className="form-items">
+          <label htmlFor="email">Email: </label>
+          <input
+            type="email" placeholder="used to sign in" name="email" value={user.email}
+            required onChange={onChange} />
+        </div>
 
-        <label htmlFor="password">Password: </label>
-        <input type="password" placeholder="password" name="password" value={user.password}
-          required minLength={6} maxLength={12} onChange={onChange} />
+        <div className="form-items">
+          <label htmlFor="username">Username: </label>
+          <input type="text" placeholder="display name" name="username" value={user.username}
+            required minLength={3} maxLength={12} onChange={onChange} />
+        </div>
 
-        <label htmlFor="password2">Confirm Password: </label>
-        <input type="password" placeholder="confirm password" name="password2" value={user.password2}
-          required minLength={6} onChange={onChange} />
-        <input type="submit" maxLength={12} value="Register" />
+        <div className="form-items">
+          <label htmlFor="password">Password: </label>
+          <input type="password" placeholder="password" name="password" value={user.password}
+            required minLength={6} maxLength={12} onChange={onChange} />
+        </div>
+
+        <div className="form-items">
+          <label htmlFor="password2">Confirm Password: </label>
+          <input type="password" placeholder="confirm password" name="password2" value={user.password2}
+            required minLength={6} onChange={onChange} />
+        </div>
+
+        <input className="form-submit-button" type="submit" maxLength={12} value="Register" />
       </form>
     </div>
   )
