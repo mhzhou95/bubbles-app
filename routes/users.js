@@ -24,7 +24,8 @@ router.post('/', async (req, res) => {
     //  create payload for jwt web token
     const payload = {
       user: {
-        id: newUser.id
+        id: newUser.id,
+        username: newUser.username
       }
     }
     // create web token with expiration

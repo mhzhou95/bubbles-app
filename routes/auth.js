@@ -23,6 +23,7 @@ router.get('/', auth, async (req, res) => {
 router.post('/', async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
+
   try {
     let user = await User.findOne({ email });
     if (!user) {
@@ -36,7 +37,8 @@ router.post('/', async (req, res) => {
     //  create payload for jwt web token
     const payload = {
       user: {
-        id: user.id
+        id: user.id,
+        username: user.username
       }
     }
     // create web token with expiration

@@ -7,11 +7,12 @@ const auth = require('../middleware/auth');
 
 // @description: get all bubbles
 // @route: GET api/bubbles
-// @acces : Private
-router.get('/', auth, async (req, res) => {
+// @acces : public
+router.get('/', async (req, res) => {
   try {
-    const bubbles = await Bubble.find({ user: req.user.find }).sort({ createdAt: -1 });
+    const bubbles = await Bubble.find().sort({ createdAt: -1 });
     res.json(bubbles);
+
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server Error')
@@ -26,27 +27,46 @@ router.post('/', auth, async (req, res) => {
   try {
     const newBubble = new Bubble({
       user: req.user.id,
+      username: req.user.username,
       message
     });
     const bubble = await newBubble.save();
     res.json(bubble);
   } catch (error) {
-    console.error(error.message);
     res.status(500).send('Server Error')
   }
 });
+// @description: upvote a bubble
+// @route: PUT api/bubbles/:id
+// @acess : Public
+router.put('/:id', async (req, res) => {
+  const message = req.body.message;
+  const upvotes = req.body.upvotes;
+
+  try {
+    let bubble = await Bubble.findByIdAndUpdate(req.params.id);
+    bubble.upvotes = upvotes;
+    bubble.message = message;
+    bubble.save();
+    res.json(bubble)
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+})
 // @description:  update a bubble
 // @route: PUT api/bubbles/:id
 // @acces : Private
 router.put('/:id', auth, async (req, res) => {
   const message = req.body.message;
-
+  const upvotes = req.body.upvotes;
   try {
     let bubble = await Bubble.findByIdAndUpdate(req.params.id);
     //auth user
     if (bubble.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: 'Not authorized' });
     }
+    bubble.upvotes = upvotes;
     bubble.message = message;
     bubble.save();
     res.json(bubble)

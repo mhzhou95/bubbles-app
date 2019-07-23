@@ -57,6 +57,7 @@ const BubbleState = props => {
       }
     }
     try {
+
       const res = await axios.put(`/api/bubbles/${bubble._id}`, bubble, config)
       dispatch({ type: UPDATE_BUBBLE, payload: res.data })
     } catch (error) {
@@ -72,6 +73,7 @@ const BubbleState = props => {
       dispatch({ type: BUBBLE_ERROR, payload: error.response.msg })
     }
   }
+
   // Search Filter
   const filterBubbles = (text) => {
     dispatch({ type: FILTER_BUBBLES, payload: text })

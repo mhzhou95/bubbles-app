@@ -12,10 +12,13 @@ const bubbleSchema = new Schema(
       required: true,
       minlength: 1
     },
+    username: {
+      type: String
+    },
     upvotes: {
       type: Number,
       default: 0
-    }
+    },
   },
   {
     timestamps: true

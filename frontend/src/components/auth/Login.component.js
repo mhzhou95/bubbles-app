@@ -12,14 +12,14 @@ const Login = (props) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      console.log('authen')
-    }
 
+      window.location.href = ('/')
+    }
     if (error !== null) {
-      if (alertContext.alerts.length < 2) {
+      if (alertContext.alerts.length < 1) {
         setAlert(error);
-        console.log(error)
       }
+      clearErrors()
     }
     // eslint-disable-next-line
   }, [error, isAuthenticated, props.history]);

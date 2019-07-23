@@ -7,7 +7,8 @@ const BubbleEdit = (props) => {
   const getBubble = bubbleContext.bubbles.filter(bubble => bubble._id.toString() === param);
   const [bubble, setBubble] = useState({
     _id: getBubble[0]._id,
-    message: getBubble[0].message
+    message: getBubble[0].message,
+    upvotes: getBubble[0].upvotes
   });
   const { message } = bubble;
 
