@@ -11,7 +11,7 @@ const Register = (props) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      props.history.push('/');
+      window.location.href = ('/')
     }
     if (error === 'User already exists') {
       if (alertContext.alerts.length < 2) {

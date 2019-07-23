@@ -50,7 +50,7 @@ const Login = (props) => {
 
         <div className="form-items">
           <label htmlFor="password">Password: </label>
-          <input type="text" placeholder="password" name="password" value={password}
+          <input type="password" placeholder="password" name="password" value={password}
             required onChange={onChange} />
         </div>
         <input className="form-submit-button" type="submit" value="Login" />
