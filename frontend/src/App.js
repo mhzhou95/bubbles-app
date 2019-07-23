@@ -17,6 +17,8 @@ import BubbleState from './context/bubble/BubbleState';
 import AlertState from './context/alert/AlertState';
 import setAuthToken from './utils/setAuthToken';
 
+import './styles/styles.scss';
+
 if (localStorage.token) {
   setAuthToken(localStorage.token)
 }

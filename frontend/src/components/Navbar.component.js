@@ -13,19 +13,25 @@ const Navbar = () => {
 
   }
   const authLinks = (
-    <Fragment>
-      <li>Hello {user && user.username}</li>
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/create">Create Bubble</Link></li>
-      <li><a onClick={onLogout} href="#!"><i className="fas fa-sign-out-alt">
-      </i> Logout</a></li>
+    <Fragment >
+      <nav className="nav-bar">
+        <ul>
+          <h2>Hello {user && user.username}</h2>
+          <li ><Link className="link" to="/">Home</Link></li>
+          <li ><Link className="link" to="/create">Create Bubble</Link></li>
+          <li ><a className="link" onClick={onLogout} href="#!"><i className="fas fa-sign-out-alt">
+          </i> Logout</a></li>
+        </ul>
+      </nav>
     </Fragment>
   );
   const guestLinks = (
-    <Fragment>
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/register">Register</Link></li>
-      <li><Link to="/login">Login</Link></li>
+    <Fragment >
+      <nav className="nav-bar">
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/register">Register</Link></li>
+        <li><Link to="/login">Login</Link></li>
+      </nav>
     </Fragment>);
   return (
     <nav>
