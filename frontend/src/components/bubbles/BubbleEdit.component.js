@@ -21,11 +21,11 @@ const BubbleEdit = (props) => {
     props.history.push('/')
   }
   return (
-    <div>
+    <div className="edit-form">
       <form onSubmit={onSubmit}>
-        <h3>Edit Bubble</h3>
-        <input type="text" placeholder="text" name="message" value={message} onChange={onChange} />
-        <input type="submit" value="edit" />
+        <h3 className="form-items">Edit Bubble</h3>
+        <input className="form-items" type="text" placeholder="text" name="message" value={message} onChange={onChange} />
+        <input className="form-submit-button" type="submit" value="edit" />
       </form>
     </div>
   )

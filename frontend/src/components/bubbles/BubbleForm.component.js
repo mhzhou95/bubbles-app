@@ -22,11 +22,14 @@ const BubbleForm = (props) => {
     props.onSubmit()
   }
   return (
-    <form onSubmit={onSubmit}>
-      <h3>Create Bubble</h3>
-      <input type="text" placeholder="text" name="message" value={message} onChange={onChange} />
-      <input type="submit" value="create" />
-    </form>
+    <div className="bubble-form">
+      <form onSubmit={onSubmit}>
+        <h3 className="form-items" >Create Bubble</h3>
+        <input className="form-items" type="text" placeholder="text" name="message" value={message} onChange={onChange} />
+        <input className="form-submit-button" type="submit" value="create" />
+      </form>
+    </div>
+
   )
 }
 

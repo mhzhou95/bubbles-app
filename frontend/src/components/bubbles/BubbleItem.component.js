@@ -15,6 +15,8 @@ const BubbleItem = (props) => {
     message: bubble.message,
     upvotes: bubble.upvotes
   });
+  const [disabled, setDisabled] = useState(false);
+
   const editLink = `/bubble/${bubble._id}`;
 
   const handleUpVote = async () => {
@@ -26,6 +28,7 @@ const BubbleItem = (props) => {
 
     await updateBubble(upvotes);
     await bubbleContext;
+    setDisabled(true);
   }
 
   const onDelete = () => {
@@ -35,7 +38,7 @@ const BubbleItem = (props) => {
     <div className="bubble-item-container">
       <h2>{bubble.username}</h2>
       <p className="bubble-item-message">{bubble.message}</p>
-      <p className="bubble-item-upvotes">upvotes: {bubble.upvotes} <button onClick={handleUpVote}><i className="fas fa-arrow-alt-circle-up"></i></button></p>
+      <p className="bubble-item-upvotes">upvotes: {bubble.upvotes} <button disabled={disabled} onClick={handleUpVote}><i className="fas fa-arrow-alt-circle-up"></i></button></p>
       {isAuthenticated && user._id === bubble.user &&
         <Fragment>
           <button onClick={onDelete}>Delete</button>  <button><Link className="bubble-item-link" to={editLink}>Edit</Link></button>
