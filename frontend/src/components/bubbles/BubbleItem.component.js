@@ -36,7 +36,7 @@ const BubbleItem = (props) => {
   }
   return (
     <div className="bubble-item-container">
-      <h2>{bubble.username} {' '}says:</h2>
+      <h2>{bubble.username} {' '}<h4>says:</h4></h2>
       <p className="bubble-item-message">{bubble.message}</p>
       <p className="bubble-item-upvotes">upvotes: {bubble.upvotes} <button disabled={disabled} onClick={handleUpVote}><i className="fas fa-arrow-alt-circle-up"></i></button></p>
       {isAuthenticated && user._id === bubble.user &&
